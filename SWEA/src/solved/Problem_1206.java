@@ -1,7 +1,6 @@
-package running;
+package solved;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Problem_1206 {
@@ -31,6 +30,7 @@ public class Problem_1206 {
 	{
 		Scanner in = new Scanner(System.in);
 		int t = 10;
+		@SuppressWarnings("unchecked")
 		ArrayList<Integer>[] arr = new ArrayList[10];
 		for(int i=0; i<t; i++)
 		{
