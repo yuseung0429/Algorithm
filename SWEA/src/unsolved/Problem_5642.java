@@ -17,7 +17,6 @@ public class Problem_5642 {
 				System.out.println(max);
 				max = sum;
 			}
-				
 		}
 		return max;
 	}
