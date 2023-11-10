@@ -29,6 +29,7 @@ public class Problem_1285 {
 	{
 		Scanner in = new Scanner(System.in);
 		int t = Integer.parseInt(in.nextLine());
+		@SuppressWarnings("unchecked")
 		ArrayList<Integer>[] array = new ArrayList[t];
 		for(int i=0; i<t; i++)
 		{
@@ -40,5 +41,6 @@ public class Problem_1285 {
 		}
 		for(int i=0; i<t; i++)
 			System.out.println("#" + (i+1) +" " + solution(array[i]));
+		in.close();
 	}
 }
