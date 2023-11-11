@@ -21,8 +21,8 @@ def distance(number, pos):
             
 def solution(numbers, hand):
     result = ""
-    left_pos = -1;
-    right_pos = -1;
+    left_pos = -1
+    right_pos = -1
     for i in numbers :
         print((left_pos, right_pos))
         if i in [1,4,7]:

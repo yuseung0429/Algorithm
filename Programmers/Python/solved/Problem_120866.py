@@ -26,6 +26,5 @@ def mark(board, result, idx_r, idx_c):
                 result[idx_r+i][idx_c+j] = 1
     return result
 
-
 board = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
 print(solution(board))

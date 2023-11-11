@@ -1,3 +1,7 @@
+
+# link : https://school.programmers.co.kr/learn/courses/30/lessons/120896
+# title : 한 번만 등장한 문자
+
 def solution(s):
     dic = {}
     list = []
@@ -11,6 +15,3 @@ def solution(s):
             list.append(k)
     list.sort()
     return "".join(list)
-
-
-print(solution("abcdasdasd"))
