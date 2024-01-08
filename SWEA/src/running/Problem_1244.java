@@ -45,6 +45,6 @@ public class Problem_1244 {
 		}
 		for(int i=0; i<t; i++)
 			System.out.println("# " + (i+1) + " " + solution(number[i], cnt_exch[i]));
-		
+		in.close();
 	}
 }
