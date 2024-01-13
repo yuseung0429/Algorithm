@@ -4,18 +4,15 @@ import java.io.InputStreamReader;
 
 public class Main {
 	public static void solution(int n, int l) {
-		int sum = 0;
 		int start = 0;
 		int end = l-1;
-		for(int i=0; i<l; i++)
-			sum += i;
+		int sum = end*(end+1)/2;
+
 		while(l <= 100) {
 			if(sum > n) {
-				sum = 0;
 				start = 0;
 				end = ++l-1;
-				for(int i=0; i<l; i++)
-					sum += i;
+				sum = end*(end+1)/2;
 			}	
 			else if(sum < n) {
 				sum -= start++;
