@@ -22,7 +22,6 @@ public class Main {
         //최솟값 : (시작이 100번째 채널이므로...)
         min = Math.abs(100 - Integer.parseInt(target));
 
-        //처음 0 이 아닌 경우 계산
         for(int i = 0; i < 10; i++) {
             if(notUsed[i] == 1) {
                 continue;
@@ -34,10 +33,16 @@ public class Main {
 
 
     static void backTracking(int depth, Integer in) {
+        if(depth == target.length() - 1) {
+            setMin(in, depth);
+        }
 
-        setMin(in, depth);
+        if(depth == target.length()) {
+            setMin(in, depth);
+        }
 
-        if(depth > target.length() + 1) {
+        if(depth == target.length() + 1) {
+            setMin(in, depth);
             return;
         }
 
