@@ -32,7 +32,7 @@ public class Main {
     }
 
 
-    static void backTracking(int depth, Integer in) {
+    static void backTracking(int depth, int in) {
         if(depth == target.length() - 1) {
             setMin(in, depth);
         }
