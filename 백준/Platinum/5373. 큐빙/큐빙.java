@@ -6,6 +6,26 @@ import java.io.OutputStreamWriter;
 
 public class Main {
 	
+	static final int UP = 0;
+	static final int DOWN = 1;
+	static final int FRONT = 2;
+	static final int BACK = 3;
+	static final int LEFT = 4;
+	static final int RIGHT = 5;
+	
+	static final int N = 0;
+	static final int E = 1;
+	static final int S = 2;
+	static final int W = 3;
+	
+	public static final boolean RTURN = true;
+	public static final boolean LTURN = false;
+
+	static int[][] rs = new int[6][];
+	static int[][][] rsn = new int[6][][];
+	static char[] color = {'w', 'y', 'r', 'o', 'g', 'b'};
+	static BufferedWriter bw;
+	
 	static class Cell {
 		char value;
 		Cell(char c){
@@ -63,124 +83,18 @@ public class Main {
 		}
 	}
 	
-	static final int UP = 0;
-	static final int DOWN = 1;
-	static final int FRONT = 2;
-	static final int BACK = 3;
-	static final int LEFT = 4;
-	static final int RIGHT = 5;
-	
-	static final int N = 0;
-	static final int E = 1;
-	static final int S = 2;
-	static final int W = 3;
-	
-	public static final boolean RTURN = true;
-	public static final boolean LTURN = false;
-	
-	static char[] color = {'w', 'y', 'r', 'o', 'g', 'b'};
-	static BufferedWriter bw;
-	
 	public static void solution(String[] steps) throws IOException {
 		Plane[] cube = new Plane[6];
 		for(int i=0; i<6; i++)
 			cube[i] = new Plane(color[i]);
 		
-		cube[UP].sides[N][0] = cube[BACK].owns[0];
-		cube[UP].sides[N][1] = cube[BACK].owns[1];
-		cube[UP].sides[N][2] = cube[BACK].owns[2];
-		
-		cube[UP].sides[E][0] = cube[RIGHT].owns[0];
-		cube[UP].sides[E][1] = cube[RIGHT].owns[1];
-		cube[UP].sides[E][2] = cube[RIGHT].owns[2];
-		
-		cube[UP].sides[S][0] = cube[FRONT].owns[0];
-		cube[UP].sides[S][1] = cube[FRONT].owns[1];
-		cube[UP].sides[S][2] = cube[FRONT].owns[2];
-		
-		cube[UP].sides[W][0] = cube[LEFT].owns[0];
-		cube[UP].sides[W][1] = cube[LEFT].owns[1];
-		cube[UP].sides[W][2] = cube[LEFT].owns[2];
-		
-		cube[DOWN].sides[N][0] = cube[FRONT].owns[6];
-		cube[DOWN].sides[N][1] = cube[FRONT].owns[7];
-		cube[DOWN].sides[N][2] = cube[FRONT].owns[8];
-		
-		cube[DOWN].sides[E][0] = cube[RIGHT].owns[6];
-		cube[DOWN].sides[E][1] = cube[RIGHT].owns[7];
-		cube[DOWN].sides[E][2] = cube[RIGHT].owns[8];
-		
-		cube[DOWN].sides[S][0] = cube[BACK].owns[6];
-		cube[DOWN].sides[S][1] = cube[BACK].owns[7];
-		cube[DOWN].sides[S][2] = cube[BACK].owns[8];
-		
-		cube[DOWN].sides[W][0] = cube[LEFT].owns[6];
-		cube[DOWN].sides[W][1] = cube[LEFT].owns[7];
-		cube[DOWN].sides[W][2] = cube[LEFT].owns[8];
-		
-		cube[FRONT].sides[N][0] = cube[UP].owns[6];
-		cube[FRONT].sides[N][1] = cube[UP].owns[7];
-		cube[FRONT].sides[N][2] = cube[UP].owns[8];
-		
-		cube[FRONT].sides[E][0] = cube[RIGHT].owns[0];
-		cube[FRONT].sides[E][1] = cube[RIGHT].owns[3];
-		cube[FRONT].sides[E][2] = cube[RIGHT].owns[6];
-		
-		cube[FRONT].sides[S][0] = cube[DOWN].owns[2];
-		cube[FRONT].sides[S][1] = cube[DOWN].owns[1];
-		cube[FRONT].sides[S][2] = cube[DOWN].owns[0];
-		
-		cube[FRONT].sides[W][0] = cube[LEFT].owns[8];
-		cube[FRONT].sides[W][1] = cube[LEFT].owns[5];
-		cube[FRONT].sides[W][2] = cube[LEFT].owns[2];
-		
-		cube[BACK].sides[N][0] = cube[UP].owns[2];
-		cube[BACK].sides[N][1] = cube[UP].owns[1];
-		cube[BACK].sides[N][2] = cube[UP].owns[0];
-		
-		cube[BACK].sides[E][0] = cube[LEFT].owns[0];
-		cube[BACK].sides[E][1] = cube[LEFT].owns[3];
-		cube[BACK].sides[E][2] = cube[LEFT].owns[6];
-		
-		cube[BACK].sides[S][0] = cube[DOWN].owns[6];
-		cube[BACK].sides[S][1] = cube[DOWN].owns[7];
-		cube[BACK].sides[S][2] = cube[DOWN].owns[8];
-		
-		cube[BACK].sides[W][0] = cube[RIGHT].owns[8];
-		cube[BACK].sides[W][1] = cube[RIGHT].owns[5];
-		cube[BACK].sides[W][2] = cube[RIGHT].owns[2];
-		
-		cube[LEFT].sides[N][0] = cube[UP].owns[0];
-		cube[LEFT].sides[N][1] = cube[UP].owns[3];
-		cube[LEFT].sides[N][2] = cube[UP].owns[6];
-		
-		cube[LEFT].sides[E][0] = cube[FRONT].owns[0];
-		cube[LEFT].sides[E][1] = cube[FRONT].owns[3];
-		cube[LEFT].sides[E][2] = cube[FRONT].owns[6];
-		
-		cube[LEFT].sides[S][0] = cube[DOWN].owns[0];
-		cube[LEFT].sides[S][1] = cube[DOWN].owns[3];
-		cube[LEFT].sides[S][2] = cube[DOWN].owns[6];
-		
-		cube[LEFT].sides[W][0] = cube[BACK].owns[8];
-		cube[LEFT].sides[W][1] = cube[BACK].owns[5];
-		cube[LEFT].sides[W][2] = cube[BACK].owns[2];
-		
-		cube[RIGHT].sides[N][0] = cube[UP].owns[8];
-		cube[RIGHT].sides[N][1] = cube[UP].owns[5];
-		cube[RIGHT].sides[N][2] = cube[UP].owns[2];
-		
-		cube[RIGHT].sides[E][0] = cube[BACK].owns[0];
-		cube[RIGHT].sides[E][1] = cube[BACK].owns[3];
-		cube[RIGHT].sides[E][2] = cube[BACK].owns[6];
-		
-		cube[RIGHT].sides[S][0] = cube[DOWN].owns[8];
-		cube[RIGHT].sides[S][1] = cube[DOWN].owns[5];
-		cube[RIGHT].sides[S][2] = cube[DOWN].owns[2];
-		
-		cube[RIGHT].sides[W][0] = cube[FRONT].owns[8];
-		cube[RIGHT].sides[W][1] = cube[FRONT].owns[5];
-		cube[RIGHT].sides[W][2] = cube[FRONT].owns[2];
+		for(int i=UP; i<=RIGHT; i++)
+			for(int j=N; j<=W; j++)
+				cube[i].sides[j] = new Cell[] {
+						cube[rs[i][j]].owns[rsn[i][j][0]],
+						cube[rs[i][j]].owns[rsn[i][j][1]],
+						cube[rs[i][j]].owns[rsn[i][j][2]]
+				};
 		
 		for(String step : steps) {
 			switch(step) {
@@ -198,6 +112,7 @@ public class Main {
 			case "R-": cube[RIGHT].rotate(LTURN); break;
 			}
 		}
+		
 		Cell[] plane = cube[UP].owns;
 		for(int i=0; i<9; i++) {
 			bw.append(plane[i].value);
@@ -206,10 +121,29 @@ public class Main {
 		}
 	}
 	
+	public static void setup() {
+		rs = new int[6][];
+		rsn = new int[6][][];
+		
+		rs[UP] = new int[]{BACK, RIGHT, FRONT, LEFT};
+		rs[DOWN] = new int[]{FRONT, RIGHT, BACK, LEFT};
+		rs[FRONT] = new int[]{UP, RIGHT, DOWN, LEFT};
+		rs[BACK] = new int[]{UP, LEFT, DOWN, RIGHT};
+		rs[LEFT] = new int[]{UP, FRONT, DOWN, BACK};
+		rs[RIGHT] = new int[]{UP, BACK, DOWN, FRONT};
+		
+		rsn[UP] = new int[][] {{0, 1, 2},{0, 1, 2},{0, 1, 2},{0, 1, 2}};
+		rsn[DOWN] = new int[][] {{6, 7, 8},{6, 7, 8},{6, 7, 8},{6, 7, 8}};
+		rsn[FRONT] = new int[][] {{6, 7, 8},{0, 3, 6},{2, 1, 0},{8, 5, 2}};
+		rsn[BACK] = new int[][] {{2, 1, 0},{0, 3, 6},{6, 7, 8},{8, 5, 2}};
+		rsn[LEFT] = new int[][] {{0, 3, 6},{0, 3, 6},{0, 3, 6},{8, 5, 2}};
+		rsn[RIGHT] = new int[][] {{8, 5, 2},{0, 3, 6},{8, 5, 2},{8, 5, 2}};
+	}
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+		setup();
 		int t = Integer.parseInt(br.readLine());
 		for(int i=0; i<t; i++) {
 			br.readLine();
