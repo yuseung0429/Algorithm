@@ -16,7 +16,7 @@ class Main{
 		while(left <= right){
 			long mid = (left + right) / 2;
 			long sum = 0;
-			for(long num : arr){
+			for(int num : arr){
 				sum += (mid/num);
 				if(sum >= m) 
 					break;
