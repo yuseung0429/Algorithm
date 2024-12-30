@@ -80,6 +80,10 @@ class Main {
 	}
 	
 	public static void rec(boolean[] visited, int cost, int currentIdx, int currentDepth) {
+		if(cost >= minCost) {
+			return;
+		}
+		
 		if(currentDepth == maxDepth) {
 			minCost = Math.min(minCost, cost);
 			return;
