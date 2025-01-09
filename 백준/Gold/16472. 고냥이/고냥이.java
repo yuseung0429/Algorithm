@@ -3,55 +3,41 @@ import java.util.*;
 
 class Main {
 	
-	static char[] arr;
-	static int k;
-	static int[] countArray = new int[(int)('z'-'a')+1];
-	static int maxLength;
-	static int useCount;
-	static int length;
-	static int start;
-	static int end;
+	public static int solution(int k, char[] arr) {
 	
-	public static int solution() {
-		while (end < arr.length) {
-			if (useCount < k) {
-				append();
-			} else if (useCount > k) {
-				remove();
-			} else {
-				if (countArray[arr[end]-'a'] == 0) {
-					remove();
-				} else {
-					append();
+		int start = 0;
+		int end = 0;
+		
+		int count = 0;
+		int[] counter = new int['z'-'a'+1];
+		
+		int maxLength = 0;
+		
+		counter[arr[end]-'a']++;
+		count++;
+		
+		while (++end < arr.length) {
+			
+			if (counter[arr[end]-'a']++ == 0) {
+				count++;
+			}
+			
+			while (count > k && start < end) {
+				if (--counter[arr[start++]-'a'] == 0) {
+					count--;
 				}
 			}
+			
+			maxLength = Math.max(maxLength, end - start + 1);
 		}
+		
 		return maxLength;
-	}
-	
-	public static void append() {
-		if(countArray[arr[end]-'a'] == 0) {
-			useCount++;	
-		} 
-		countArray[arr[end]-'a']++;
-		length++;
-		end++;
-		maxLength = Math.max(maxLength, length);
-	};
-	
-	public static void remove() {
-		countArray[arr[start]-'a'] -= 1;
-		if (countArray[arr[start]-'a'] == 0) {
-			useCount--;
-		}
-		length--;
-		start++;
 	}
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		k = Integer.parseInt(br.readLine());
-		arr = br.readLine().toCharArray();
-		System.out.println(solution());
+		int k = Integer.parseInt(br.readLine());
+		char[] arr = br.readLine().toCharArray();
+		System.out.println(solution(k, arr));
 	}
 }
