@@ -31,6 +31,9 @@ class Main {
 			vertex[node[1]] = node[0];
 			
 			for (int[] child : graphs[node[1]]) {
+				if (costs[child[0]] <= costs[node[1]]+child[1]) {
+					continue;
+				}
 				pq.add(new int[]{node[1], child[0], costs[node[1]]+child[1]});
 			}
 		}
@@ -75,6 +78,9 @@ class Main {
 			costs[node[1]] = node[2];
 			
 			for (int[] child : graphs[node[1]]) {
+				if (costs[child[0]] <= costs[node[1]]+child[1]) {
+					continue;
+				}
 				pq.add(new int[]{node[1], child[0], costs[node[1]]+child[1]});
 			}
 		}
