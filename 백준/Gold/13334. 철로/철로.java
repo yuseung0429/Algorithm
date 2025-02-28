@@ -16,33 +16,23 @@ class Main {
 		int end;
 	}
 	
-	public static int solution(int minValue) {
+	public static int solution() {
 		Arrays.sort(nodes, (o1, o2) -> o1.end - o2.end);
-		PriorityQueue<Node> pq = new PriorityQueue<Node>((o1, o2) -> o1.start - o2.start);
+
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
 		
 		int maxValue = Integer.MIN_VALUE;
 		
-		int i = 0;
-		
-		int left = minValue;
-		int right = left+d;
-		
-		while(i<n) {
-			while(i<n && nodes[i].end <= right) {
-				pq.add(nodes[i]);
-				i++;
-			}
+		for (Node node : nodes) {
+			pq.add(node.start);
 			
-			while(!pq.isEmpty() && pq.peek().start < left) {
+			while(!pq.isEmpty() && pq.peek() < node.end - d) {
 				pq.poll();
 			}
 			
 			maxValue = Math.max(maxValue, pq.size());
-			
-			left += 1;
-			right += 1;
 		}
-		
+
 		return maxValue;
 	}
 
@@ -52,24 +42,20 @@ class Main {
 		n = Integer.parseInt(br.readLine());		
 		nodes = new Node[n];
 		
-		int minValue = Integer.MAX_VALUE;
-		
 		for (int i=0; i<n; i++) {
 			String[] temp = br.readLine().split(" ");
 			int a = Integer.parseInt(temp[0]);
 			int b = Integer.parseInt(temp[1]);
 			if (a > b) {
 				nodes[i] = new Node(b, a);
-				minValue = Math.min(minValue, b);
 			} else {
 				nodes[i] = new Node(a, b);
-				minValue = Math.min(minValue, a);
 			}
 		}
 		
 		d = Integer.parseInt(br.readLine());
 		
-		System.out.println(solution(minValue));
+		System.out.println(solution());
 	}
 
 }
