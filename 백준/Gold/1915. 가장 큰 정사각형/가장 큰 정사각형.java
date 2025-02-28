@@ -36,9 +36,9 @@ class Main {
 		int[][] matrix = new int[n][m];
 		
 		for (int i=0; i<n; i++) {
-			temp = br.readLine().split("");
+			String line = br.readLine();
 			for (int j=0; j<m; j++) {
-				matrix[i][j] = Integer.parseInt(temp[j]);
+				matrix[i][j] = line.charAt(j) == '0' ? 0 : 1; 
 			}
 		}
 		
